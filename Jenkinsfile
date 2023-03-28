@@ -1,28 +1,22 @@
 pipeline {
-    agent any
+  agent any
 
-    tools {
-        // Install the Maven version configured as "M3" and add it to the path.
-        maven "maven3"
+  tools {
+    // Install the Maven version configured as "M3" and add it to the path.
+    maven "maven3"
+  }
+
+  stages {
+    stage('Build') {
+      steps {
+        // Get some code from a GitHub repository
+        git branch: 'main', url: 'https://github.com/Nafrin-Ilma/new_repo_lab2_q3'
+      }
     }
-
-    stages {
-        stage('Build') {
-            steps {
-                // Get some code from a GitHub repository
-                git 'https://github.com/Nafrin-Ilma/new_repo_lab2_q3'
-
-                // Run Maven on a Unix agent.
-                //sh "mvn -Dmaven.test.failure.ignore=true clean package"
-
-                // To run Maven on a Windows agent, use
-                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'mvn clean install'
-            }
-        }
+    stage('Compile') {
+      steps {
+        bat 'mvn clean compile'
+      }
     }
+  }
 }
