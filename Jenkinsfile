@@ -3,8 +3,7 @@ pipeline {
 
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
-        maven "maven3"
-        jdk "JDK 9"
+        maven "M3"
     }
 
     stages {
@@ -19,14 +18,11 @@ pipeline {
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
-            stage('clean') {
-                steps {
-                    sh 'mvn clean install'
-                }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn clean install'
             }
         }
     }
 }
-
-                
-                 
