@@ -1,5 +1,10 @@
-stage('Build Maven') {
-  steps {
-    sh 'mvn clean install'
-  }
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+    }
 }
